@@ -1,0 +1,282 @@
+<MainTabs>
+    do_default_tab: False
+    TabbedPanelItem:
+        text: 'Connection'
+        BoxLayout:
+            orientation: 'vertical'
+            GridLayout:
+                cols: 2
+                row_default_height: dp(30)
+                row_force_default: True
+                Label:
+                    text: 'FQDN or IP Address of vCenter'
+                TextInput:
+                    id: address
+                    multiline: False
+                    font_size: dp(18)
+                Label:
+                    text: 'Username'
+                TextInput:
+                    id: username
+                    multiline: False
+                    font_size: dp(18)
+                Label:
+                    text: 'Password'
+                TextInput:
+                    id: password
+                    multiline: False
+                    password: True
+                    font_size: dp(18)
+                Button:
+                    text: 'Connect'
+                    background_normal: ''
+                    background_color: (0,1,0,1)
+                    on_release: root.start_connect()
+                Button:
+                    text: 'Disconnect'
+                    background_normal: ''
+                    background_color: (1,0,0,1)
+                    on_release: root.disconnect()
+            Label:
+                text: root.status_bar
+                readonly: True
+                font_size: dp(18)
+                size_hint_y: None
+                height: dp(50)
+            ProgressBar:
+                max: 1
+                size_hint_y: None
+                height: dp(50)
+                value: root.progress_bar
+    TabbedPanelItem:
+        text: 'VM Tools'
+        BoxLayout:
+            orientation: 'horizontal'
+            ScrollView:
+                scroll_distance: dp(300)
+                size_hint_x: None
+                width: dp(600)
+                border: dp(5)
+                BoxLayout:
+                    orientation: 'vertical'
+                    id: vm_list
+                    size_hint_x: None
+                    size_hint_y: None
+                    width: dp(600)
+            GridLayout:
+                row_default_height: dp(30)
+                row_force_default: True
+                cols: 4
+                Label:
+                    text: '# of CPU'
+                TextInput:
+                    id: num_of_cpu
+                    readonly: True
+                    multiline: False
+                Button:
+                    text: 'Power On'
+                    on_release: root.power_on_vm()
+                Button:
+                    text: 'Task View'
+                    on_release: root.task_view()
+                Label:
+                    text: 'CPU Usage'
+                TextInput:
+                    id: cpu_usage
+                    readonly: True
+                    multiline: False
+                Button:
+                    text: 'Power Off'
+                    on_release: root.power_off_vm()
+                Button:
+                    text: 'Rename'
+                    on_release: root.rename_vm()
+                Label:
+                    text: 'Memory Usage'
+                TextInput:
+                    id: memory_usage
+                    readonly: True
+                    multiline: False
+                Button:
+                    text: 'Promote'
+                    on_release: root.promote_vm()
+                Button:
+                    text: 'Clone'
+                    on_release: root.clone_vm()
+                Label:
+                    text: 'Total RAM'
+                TextInput:
+                    id: total_memory
+                    readonly: True
+                    multiline: False
+                Button:
+                    text: 'Snapshot'
+                    on_release: root.create_snapshot()
+                Button:
+                    text: 'Migrate VM'
+                    on_release: root.migrate_vm()
+                Label:
+                    text: 'Disk Usage'
+                TextInput:
+                    id: disk_usage
+                    readonly: True
+                    multiline: False
+                Button:
+                    text: 'Linked Clone'
+                    on_release: root.linked_clone()
+                Button:
+                    text: 'Delete VM'
+                    on_release: root.delete_vm()
+                Label:
+                    text: 'Powered On?'
+                TextInput:
+                    id: powered_on
+                    readonly: True
+                    multiline: False
+                Button:
+                    text: 'Instant Clone'
+                    on_release: root.instant_clone()
+                Button:
+                    text: ''
+                    background_normal: ''
+                    background_color: (0,0,0,0)
+                Label:
+                    text: 'Frozen?'
+                TextInput:
+                    id: frozen
+                    readonly: True
+                    multiline: False
+                Button:
+                    text: 'Freeze'
+                    on_release: root.freeze_vm()
+                Button:
+                    text: ''
+                    background_normal: ''
+                    background_color: (0,0,0,0)
+                Label:
+                    text: '# of Disks'
+                TextInput:
+                    id: num_of_disks
+                    readonly: True
+                    multiline: False
+                Button:
+                    text: 'BIOS Boot'
+                    on_release: root.bios_boot()
+                Button:
+                    text: ''
+                    background_normal: ''
+                    background_color: (0,0,0,0)
+                Label:
+                    text: '# of Snapshots'
+                TextInput:
+                    id: num_of_snapshots
+                    readonly: True
+                    multiline: False
+                Button:
+                    text: 'Reset'
+                    on_release: root.reset_vm()
+                Button:
+                    text: ''
+                    background_normal: ''
+                    background_color: (0,0,0,0)
+                Label:
+                    text: '# of Files/Disk'
+                TextInput:
+                    id: num_of_files_per_disk
+                    multiline: False
+                Button:
+                    text: 'Reboot Guest'
+                    on_release: root.reboot_vm_guest()
+                Button:
+                    text: ''
+                    background_normal: ''
+                    background_color: (0,0,0,0)
+                Label:
+                    text: 'Swapped Mem'
+                TextInput:
+                    id: swapped_memory
+                    readonly: True
+                    multiline: False
+                Button:
+                    text: 'Shutdown Guest'
+                    on_release: root.shutdown_vm_guest()
+                Button:
+                    text: ''
+                    background_normal: ''
+                    background_color: (0,0,0,0)
+                Label:
+                    text: 'Host Name'
+                TextInput:
+                    id: host_name
+                    readonly: True
+                    multiline: False
+                Button:
+                    text: 'Screen Size'
+                    on_release: root.screen_size()
+                Button:
+                    text: 'Refresh List'
+                    on_release: root.refresh_list()
+    TabbedPanelItem:
+        text: 'Host Tools'
+        BoxLayout:
+            orientation: 'horizontal'
+            ScrollView:
+                scroll_distance: dp(300)
+                size_hint_x: None
+                width: dp(800)
+                border: dp(5)
+                BoxLayout:
+                    orientation: 'vertical'
+                    id: host_list
+                    size_hint_x: None
+                    size_hint_y: None
+                    width: dp(600)
+            GridLayout:
+                row_default_height: dp(30)
+                row_force_default: True
+                cols: 3
+                Label:
+                    text: 'Host CPU Usage'
+                TextInput:
+                    id: host_cpu
+                    multiline: False
+                    readonly: False
+                ProgressBar:
+                    id: cpu_bar
+                    max: 100
+                Label:
+                    text: 'Host Mem Usage'
+                TextInput:
+                    id: host_mem
+                    multiline: False
+                    readonly: False
+                ProgressBar:
+                    id: mem_bar
+                    max: 100
+                Label:
+                    text: 'Host Storage Free'
+                TextInput:
+                    id: storage_free
+                    multiline: False
+                    readonly: False
+                ProgressBar:
+                    id: storage_bar
+                    max: 100
+                Label:
+                    text: 'Powered On?'
+                TextInput:
+                    id: host_powered_on
+                    multiline: False
+                    readonly: False
+                Widget:
+                Label:
+                    text: 'Maintenance Mode?'
+                TextInput:
+                    id: host_maintenance_mode
+                    multiline: False
+                    readonly: False
+                Widget:
+    TabbedPanelItem:
+        text: 'Net Tools'
+    TabbedPanelItem:
+        text: 'DS Tools'
